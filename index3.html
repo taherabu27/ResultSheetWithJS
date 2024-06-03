@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Sheet 3</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-200 p-4">
+    <div class="container mx-auto flex-col justify-center lg:flex-row">
+        <div class="flex-row justify-center items-center bg-rose-700 ml-36 lg:w-3/4">
+            <h1 class="text-3xl font-semibold mb-4 py-6 text-center">Result Sheet</h1>
+            <div id="result-show" class="flex justify-center items-center">
+            </div>
+        </div>
+
+    </div>
+<div>
+    <form id="resultForm" class="mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+          <input type="hidden" id="productId" name="productId" value="">
+          <input type="text" id="personName" placeholder="Name" class="p-2 border border-gray-300 rounded">
+          <input type="number" id="personAge" placeholder="Age" class="p-2 border border-gray-300 rounded">
+          <input type="number" id="subjectMath" placeholder="Math" class="p-2 border border-gray-300 rounded">
+
+          <input type="number" id="subjectEnglish" placeholder="English" class="p-2 border border-gray-300 rounded">
+          <input type="number" id="subjectCse" placeholder="CSE" class="p-2 border border-gray-300 rounded">
+          <input type="number" id="subjectPhysics" placeholder="Physics" class="p-2 border border-gray-300 rounded">
+          <input type="number" id="subjectChemistry" placeholder="Chemistry" class="p-2 border border-gray-300 rounded">
+        </div>
+  
+        <!-- id not given by author but i have added... -->
+  
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded">Save Information</button>
+      </form>
+</div>
+<div>
+    <button class="bg-green-500 m-2 p-2">Position Hold</button>
+    <table >
+
+        <thead>
+            <tr>
+                <th class="border-solid border-2 border-slate-500 px-4 m-2">Secured Position</th>
+                <th class="border-solid border-2 border-slate-500 px-12 m-2">Name of the Student</th>
+                <th class="border-solid border-2 border-slate-500 px-4 m-2">Marks Obtained</th>
+            </tr>
+        </thead>
+        <tbody id="position-hold" class="bg-white p-2 border border-gray-300 rounded"></tbody>
+    </table>
+</div>
+
+    <div class=" flex justify-center mt-12">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Name</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Age</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Math</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">English</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">CSE</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Physics</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Chemistry</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Total Marks</th>
+                    <th class="border-solid border-2 border-slate-500 px-4 m-2">Actions</th>
+
+
+
+                </tr>
+
+            </thead>
+            <tbody id="table-body-data">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="result3.js"></script>
+</body>
+
+</html>
