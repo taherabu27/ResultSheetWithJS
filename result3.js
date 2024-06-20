@@ -1,6 +1,7 @@
 const results = [];
 
 let finalSubmission = [...results];
+let editIndex = null;
 
 
 // display who has secured first, second, third place....
@@ -10,20 +11,20 @@ let finalSubmission = [...results];
 function renderPosition() {
     const studentPosition = document.getElementById('position-hold');
     studentPosition.innerHTML = '';
-    const positions= positionHold();
-    positions.forEach(function (position,index){
-        const positionRow=document.createElement('tr');
+    const positions = positionHold();
+    positions.forEach(function (position, index) {
+        const positionRow = document.createElement('tr');
 
-        positionRow.innerHTML=`
-        <td class=" text-center border-solid border-2 border-slate-500 px-2 m-2">${index+1}</td>
+        positionRow.innerHTML = `
+        <td class=" text-center border-solid border-2 border-slate-500 px-2 m-2">${index + 1}</td>
         <td class=" text-center border-solid border-2 border-slate-500 px-2 m-2"> ${position.name}</td>
         <td class=" text-center border-solid border-2 border-slate-500 px-2 m-2"> ${position.totalMarks}</td>
         
         `;
-        studentPosition.appendChild(positionRow);   
-        
+        studentPosition.appendChild(positionRow);
+
     });
-   
+
 }
 
 /// function call to sort out student position...
@@ -34,7 +35,7 @@ function positionHold() {
         student.totalMarks = student.math + student.english + student.cse + student.chemistry + student.physics;
 
     });
-  // Sort the students based on total marks in descending order
+    // Sort the students based on total marks in descending order
     finalSubmission.sort(function (a, b) {
         return b.totalMarks - a.totalMarks;
 
@@ -64,16 +65,48 @@ function addNewResult(event) {
         chemistry: parseInt(studentChemistry),
     };
 
-    finalSubmission.push(addNewResultInTable);
+    if (editIndex !== null) {
+        finalSubmission[editIndex] = addNewResultInTable;
+        editIndex = null
+    } else {
+        finalSubmission.push(addNewResultInTable);
+    }
+
     showResult();
     renderPosition();
+
     document.getElementById('resultForm').reset();
 }
+
+function editInformation(index) {
+    const editedData = finalSubmission[index];
+    document.getElementById('personName').value = editedData.name;
+    document.getElementById('personAge').value = editedData.age;
+    document.getElementById('subjectMath').value = editedData.math;
+    document.getElementById('subjectEnglish').value = editedData.english;
+    document.getElementById('subjectCse').value = editedData.cse;
+    document.getElementById('subjectPhysics').value = editedData.physics;
+    document.getElementById('subjectChemistry').value = editedData.chemistry;
+    editIndex = index;
+
+    // renderResult();
+
+}
+
+function removeData(index) {
+
+    if (confirm('Are you sure to remove data?')) {
+        finalSubmission.splice(index, 1);
+    }
+    showResult();
+    renderPosition();
+}
+
 
 function showResult() {
     const resultContainer = document.getElementById('table-body-data');
     resultContainer.innerHTML = '';
-    finalSubmission.forEach(function (result) {
+    finalSubmission.forEach(function (result, index) {
         const resultDataRow = document.createElement('tr');
         resultDataRow.innerHTML = `
             <td class="text-center border-solid border-2 border-slate-500 px-8 m-6">${result.name}</td>
@@ -87,8 +120,8 @@ function showResult() {
                 ${result.math + result.english + result.cse + result.chemistry + result.physics}
             </td>
             <td class="text-center border-solid border-2 border-slate-500 px-8 m-6">
-                <button onclick="amendResult()" class="bg-green-500 text-white p-2 rounded">Edit</button>
-                <button onclick="deleteResult()" class="bg-red-500 text-white p-1 px-3 rounded">Delete</button>
+                <button onclick="editInformation (${index})" class="bg-green-500 text-white p-2 rounded">Edit</button>
+                <button onclick="removeData(${index})" class="bg-red-500 text-white p-1 px-3 rounded">Delete</button>
             </td>
         `;
         resultContainer.appendChild(resultDataRow);
